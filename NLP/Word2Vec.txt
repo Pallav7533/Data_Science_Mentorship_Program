@@ -1,0 +1,89 @@
+Demo of Word2Vec : 
+
+import gensim
+from gensim.models import Word2Vec,KeyedVectors
+
+!pip install wget
+
+!wget -c "https://s3.amazonaws.com/dl4j-distribution/GoogleNews-vectors-negative300.bin.gz"
+model = KeyedVectors.load_word2vec_format('GoogleNews-vectors-negative300.bin.gz',binary=True,limit=500000)
+model['cricket']
+model.most_similar('man')
+model.most_similar('cricket')
+model.most_similar('facebook')
+model.similarity('man','woman')
+model.similarity('man','PHP')
+model.doesnt_match(['PHP','java','monkey'])
+
+vec = model['king'] - model['man'] + model['woman']
+model.most_similar([vec])
+
+vec = model['INR'] - model ['India'] + model['England']
+model.most_similar([vec])
+
+
+
+Example - Game Of thrones Word2vec :-
+
+import numpy as np
+import pandas as pd
+
+!pip install gensim
+
+import gensim
+import os
+
+from nltk import sent_tokenize
+from gensim.utils import simple_preprocess
+
+story = []
+for filename in os.listdir('data'):
+    
+    f = open(os.path.join('data',filename))
+    corpus = f.read()
+    raw_sent = sent_tokenize(corpus)
+    for sent in raw_sent:
+        story.append(simple_preprocess(sent))
+
+story
+
+model = gensim.models.Word2Vec(
+    window=10,
+    min_count=2
+)
+
+model.build_vocab(story)
+
+model.train(story, total_examples=model.corpus_count, epochs=model.epochs)
+
+model.wv.most_similar('daenerys')
+
+model.wv.doesnt_match(['jon','rikon','robb','arya','sansa','bran'])
+
+model.wv.doesnt_match(['cersei', 'jaime', 'bronn', 'tyrion'])
+
+model.wv['king']
+
+model.wv.similarity('arya','sansa')
+
+model.wv.similarity('cersei','sansa')
+
+model.wv.similarity('tywin','sansa')
+
+model.wv.get_normed_vectors()
+
+y = model.wv.index_to_key
+
+y
+
+from sklearn.decomposition import PCA
+
+pca = PCA(n_components=3)
+X = pca.fit_transform(model.wv.get_normed_vectors())
+X.shape
+
+import plotly.express as px
+fig = px.scatter_3d(X[200:300],x=0,y=1,z=2, color=y[200:300])
+fig.show()
+
+

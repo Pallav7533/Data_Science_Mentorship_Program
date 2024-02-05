@@ -1,0 +1,18 @@
+NLP PipeLine :-
+           
+1. Data acquisition:
+   a. Available
+   b. others
+   c. Nobody
+
+2. Text Preparation
+   a. Cleaaning
+   b. Basic Preprocessing
+   c. Advance Preprocessing
+
+3. Feature Engineering
+
+4. Modeling 
+
+5. Deployment
+   
