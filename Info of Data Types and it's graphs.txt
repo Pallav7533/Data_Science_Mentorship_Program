@@ -1,0 +1,38 @@
+Types of Data :- 1. Numerical
+                 2. Categorical
+
+Types of Analysis:- 1.univariate
+                    2.bivariate & multivariate
+
+
+1. univariate Analysis
+
+Categorical data - Countplot, PieChart
+Numerical data - Histogram , Displot , Boxplot
+
+
+2. bivariate/multivariate Analysis 
+
+Numerical-Numerical  = scatterplot
+Numerical-Categorical = Barplot
+Numerical-Categorical = Boxplot
+Numerical-Categorical = Displot
+Categorical-Categorical = Heatmap
+Categorical-Categorical = Clustermap
+Categorical-Categorical = Heatmap
+Numerical-Numerical = LinePlot
+
+
+-> Pandas profiling reporn generate code:
+
+from pandas_profiling import ProfileReport
+prof = ProfileReport(df) 
+prof.to_file(output_file = output.html) 
+
+
+
+
+
+
+
+
